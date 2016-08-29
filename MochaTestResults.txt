@@ -1,0 +1,31 @@
+
+
+  convertToExpressionTree
+    √ Converting Valid Expression
+    √ Converting Invalid Expression
+    √ Converting Expression with Variable Prefix "@"
+    √ Converting Expression without Variable
+
+  evaluateExpression
+    √ Evaluating Expression (Without Prefix) (a + b) * 5
+    √ Evaluating Expression (Without Prefix) a + b / 20
+    √ Evaluating Expression (Without Prefix) isEditable || isAuthor && isAdmin
+    √ Evaluating Expression (Without Prefix) Math.sqrt(a * a)
+    √ Evaluating Expression (With Prefix) (@a + b) * 5
+    √ Evaluating Expression (With Prefix) @a + @b / 20
+    √ Evaluating Expression (With Prefix) @isEditable || @isAuthor && @isAdmin
+
+  isValidExpression
+    √ Checking Valid Expression
+    √ Checking Invalid Expression
+    √ Checking Valid Expression with Variable Prefix "@"
+    √ Checking Invalid Expression with Variable Prefix "@"
+    √ Checking Expression without Variable
+
+  setOptions
+    √ Setting up Valid Options
+    √ Setting up Invalid Options
+
+
+  18 passing (19ms)
+
