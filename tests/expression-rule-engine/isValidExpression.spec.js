@@ -30,6 +30,15 @@ var testData = {
     expressionWithoutVariable: {
         input: '1 + 2',
         output: {}
+    },
+    expressionWithNestedVariable: {
+        options: {
+            replaceVariablePrefix: true,
+            variablePrefix: '@',
+            variablePrefixReplacement: 'PREFIX_AT_'
+        },
+        input: '(@Form1|@SomeValue >= 200) || (@Form2|@OtherValue < 500)',
+        output: true
     }
 };
 
@@ -60,6 +69,12 @@ describe('isValidExpression', function () {
     it('Checking Expression without Variable', function () {
         var result = ExpressionRuleEngine.isValidExpression(testData.expressionWithoutVariable.input);
         expect(result).to.equal(true);
+    });
+
+    it('Checking Expression With Nested Variables (Separated by _)', function () {
+        ExpressionRuleEngine.setOptions(testData.expressionWithNestedVariable.options);
+        var result = ExpressionRuleEngine.isValidExpression(testData.expressionWithNestedVariable.input);
+        expect(result).to.equal(testData.expressionWithNestedVariable.output);
     });
 });
 

@@ -7,7 +7,7 @@ var testData = {
     validExpression: {
         input: 'a + b',
         output: {
-            convertedASTTokens: {
+            expressionTree: {
                 "validExpression": true,
                 "expression": "a + b",
                 "modifiedExpression": "",
@@ -35,7 +35,7 @@ var testData = {
     invalidExpression: {
         input: 'a + ',
         output: {
-            convertedASTTokens: {
+            expressionTree: {
                 "validExpression": false,
                 "expression": "a + ",
                 "modifiedExpression": "",
@@ -57,7 +57,7 @@ var testData = {
         },
         input: 'a + 2 + 5 * @someQuantity',
         output: {
-            convertedASTTokens: {
+            expressionTree: {
                 "validExpression": true,
                 "expression": "a + 2 + 5 * @someQuantity",
                 "modifiedExpression": "a + 2 + 5 * PREFIX_AT_someQuantity",
@@ -103,7 +103,7 @@ var testData = {
     expressionWithoutVariable: {
         input: '1 + 2',
         output: {
-            convertedASTTokens: {
+            expressionTree: {
                 "validExpression": true,
                 "expression": "1 + 2",
                 "modifiedExpression": "",
@@ -126,6 +126,57 @@ var testData = {
                 "error": {}
             }
         }
+    },
+    expressionWithNestedVariablePrefixAt: {
+        options: {
+            replaceVariablePrefix: true,
+            variablePrefix: '@',
+            variablePrefixReplacement: ''
+        },
+        input: '(@Form1_@SomeValue >= 200) || (@Form2_@OtherValue < 500)',
+        output: {
+            expressionTree: {
+                "validExpression": true,
+                "expression": "(@Form1_@SomeValue >= 200) || (@Form2_@OtherValue < 500)",
+                "modifiedExpression": "(Form1_SomeValue >= 200) || (Form2_OtherValue < 500)",
+                "expressionTree": {
+                    "type": "LogicalExpression",
+                    "operator": "||",
+                    "left": {
+                        "type": "BinaryExpression",
+                        "operator": ">=",
+                        "left": {
+                            "type": "Identifier",
+                            "name": "Form1_SomeValue"
+                        },
+                        "right": {
+                            "type": "Literal",
+                            "value": 200,
+                            "raw": "200"
+                        }
+                    },
+                    "right": {
+                        "type": "BinaryExpression",
+                        "operator": "<",
+                        "left": {
+                            "type": "Identifier",
+                            "name": "Form2_OtherValue"
+                        },
+                        "right": {
+                            "type": "Literal",
+                            "value": 500,
+                            "raw": "500"
+                        }
+                    }
+                },
+                "variables": [
+                    "Form1_SomeValue",
+                    "Form2_OtherValue"
+                ],
+                "hasVariable": true,
+                "error": {}
+            }
+        }
     }
 };
 
@@ -136,14 +187,14 @@ describe('convertToExpressionTree', function () {
 
         expect(result.validExpression).to.equal(true);
         expect(result.error).to.be.eqls({});
-        expect(result).to.be.eqls(testData.validExpression.output.convertedASTTokens);
+        expect(result).to.be.eqls(testData.validExpression.output.expressionTree);
     });
 
     it('Converting Invalid Expression', function () {
         var result = ExpressionRuleEngine.convertExpressionToExpressionTree(testData.invalidExpression.input);
 
         expect(result.validExpression).to.equal(false);
-        expect(result).to.be.eqls(testData.invalidExpression.output.convertedASTTokens);
+        expect(result).to.be.eqls(testData.invalidExpression.output.expressionTree);
     });
 
     it('Converting Expression with Variable Prefix "@"', function () {
@@ -151,14 +202,22 @@ describe('convertToExpressionTree', function () {
         var result = ExpressionRuleEngine.convertExpressionToExpressionTree(testData.expressionWithVariablePrefixAt.input);
 
         expect(result.validExpression).to.equal(true);
-        expect(result).to.be.eqls(testData.expressionWithVariablePrefixAt.output.convertedASTTokens);
+        expect(result).to.be.eqls(testData.expressionWithVariablePrefixAt.output.expressionTree);
     });
 
     it('Converting Expression without Variable', function () {
         var result = ExpressionRuleEngine.convertExpressionToExpressionTree(testData.expressionWithoutVariable.input);
 
         expect(result.validExpression).to.equal(true);
-        expect(result).to.be.eqls(testData.expressionWithoutVariable.output.convertedASTTokens);
+        expect(result).to.be.eqls(testData.expressionWithoutVariable.output.expressionTree);
+    });
+
+    it('Converting Expression with Nested Variable (Separated by _) and Prefix "@"', function () {
+        ExpressionRuleEngine.setOptions(testData.expressionWithNestedVariablePrefixAt.options);
+        var result = ExpressionRuleEngine.convertExpressionToExpressionTree(testData.expressionWithNestedVariablePrefixAt.input);
+
+        expect(result.validExpression).to.equal(true);
+        expect(result).to.be.eqls(testData.expressionWithNestedVariablePrefixAt.output.expressionTree);
     });
 
 });

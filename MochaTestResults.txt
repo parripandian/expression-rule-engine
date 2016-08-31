@@ -1,31 +1,34 @@
 
 
   convertToExpressionTree
-    √ Converting Valid Expression
-    √ Converting Invalid Expression
-    √ Converting Expression with Variable Prefix "@"
-    √ Converting Expression without Variable
+    ✓ Converting Valid Expression
+    ✓ Converting Invalid Expression
+    ✓ Converting Expression with Variable Prefix "@"
+    ✓ Converting Expression without Variable
+    ✓ Converting Expression with Nested Variable (Separated by _) and Prefix "@"
 
   evaluateExpression
-    √ Evaluating Expression (Without Prefix) (a + b) * 5
-    √ Evaluating Expression (Without Prefix) a + b / 20
-    √ Evaluating Expression (Without Prefix) isEditable || isAuthor && isAdmin
-    √ Evaluating Expression (Without Prefix) Math.sqrt(a * a)
-    √ Evaluating Expression (With Prefix) (@a + b) * 5
-    √ Evaluating Expression (With Prefix) @a + @b / 20
-    √ Evaluating Expression (With Prefix) @isEditable || @isAuthor && @isAdmin
+    ✓ Evaluating Expression (Without Prefix) (a + b) * 5
+    ✓ Evaluating Expression (Without Prefix) a + b / 20
+    ✓ Evaluating Expression (Without Prefix) isEditable || isAuthor && isAdmin
+    ✓ Evaluating Expression (Without Prefix) Math.sqrt(a * a)
+    ✓ Evaluating Expression (With Prefix) (@a + b) * 5
+    ✓ Evaluating Expression (With Prefix) @a + @b / 20
+    ✓ Evaluating Expression (With Prefix) @isEditable || @isAuthor && @isAdmin
+    ✓ Evaluating Expression (With Prefix) and Nested Variable (Separated by _) (@Form1_@SomeValue * 100) + (@Form2_@OtherValue / 10)
 
   isValidExpression
-    √ Checking Valid Expression
-    √ Checking Invalid Expression
-    √ Checking Valid Expression with Variable Prefix "@"
-    √ Checking Invalid Expression with Variable Prefix "@"
-    √ Checking Expression without Variable
+    ✓ Checking Valid Expression
+    ✓ Checking Invalid Expression
+    ✓ Checking Valid Expression with Variable Prefix "@"
+    ✓ Checking Invalid Expression with Variable Prefix "@"
+    ✓ Checking Expression without Variable
+    ✓ Checking Expression With Nested Variables (Separated by _)
 
   setOptions
-    √ Setting up Valid Options
-    √ Setting up Invalid Options
+    ✓ Setting up Valid Options
+    ✓ Setting up Invalid Options
 
 
-  18 passing (20ms)
+  21 passing (29ms)
 

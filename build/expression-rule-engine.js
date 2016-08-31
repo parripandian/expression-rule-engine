@@ -15,8 +15,7 @@
         getOptions: getOptions,
         isValidExpression: isValidExpression,
         convertExpressionToExpressionTree: convertToExpressionTree,
-        evaluateExpression: evaluateExpression,
-        evaluateExpressionTree: evaluateExpressionTree
+        evaluateExpression: evaluateExpression
     };
 
     var JavaScriptExpressionParser = require('jsep');
@@ -109,8 +108,8 @@
             _.forEach(tree, function (childTree, attribute) {
                 if (attribute === 'type') {
                     if (childTree === 'Identifier') {
-                        if (engineRuleOptions.replaceVariablePrefix) {
-                            variables.push(tree.name.replace(engineRuleOptions.variablePrefixReplacement, engineRuleOptions.variablePrefix));
+                        if (engineRuleOptions.replaceVariablePrefix && !_.isEmpty(engineRuleOptions.variablePrefixReplacement)) {
+                            variables.push(tree.name.replace(new RegExp(engineRuleOptions.variablePrefixReplacement, 'g'), engineRuleOptions.variablePrefix));
                         } else {
                             variables.push(tree.name);
                         }

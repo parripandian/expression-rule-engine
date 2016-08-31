@@ -79,6 +79,23 @@ var testData = {
                 evaluatedValue: true
             }
         ]
+    },
+    expressionWithNestedVariableAndPrefixAt: {
+        options: {
+            replaceVariablePrefix: true,
+            variablePrefix: '@',
+            variablePrefixReplacement: 'PREFIX_AT_'
+        },
+        inputs: [
+            {
+                expression: '(@Form1_@SomeValue * 100) + (@Form2_@OtherValue / 10)',
+                variableValues: {
+                    "Form1_SomeValue": 10,
+                    "Form2_OtherValue": 10
+                },
+                evaluatedValue: 1001
+            }
+        ]
     }
 };
 
@@ -94,6 +111,15 @@ describe('evaluateExpression', function () {
 
     _.forEach(testData.expressionWithPrefixAt.inputs, function (input) {
         it('Evaluating Expression (With Prefix) ' + input.expression, function () {
+            ExpressionRuleEngine.setOptions(testData.options);
+
+            var result = ExpressionRuleEngine.evaluateExpression(input.expression, input.variableValues);
+            expect(result.evaluatedValue).to.equal(input.evaluatedValue);
+        });
+    });
+
+    _.forEach(testData.expressionWithNestedVariableAndPrefixAt.inputs, function (input) {
+        it('Evaluating Expression (With Prefix) and Nested Variable (Separated by _) ' + input.expression, function () {
             ExpressionRuleEngine.setOptions(testData.options);
 
             var result = ExpressionRuleEngine.evaluateExpression(input.expression, input.variableValues);
