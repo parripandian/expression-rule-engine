@@ -1,7 +1,7 @@
 /**
  * Module: (JavaScript) Expression Rule Engine
  * Description: Rule engine to process the JavaScript expression based rules
- * Version: 0.4.0
+ * Version: 0.5.0
  * Author: Parri Pandian <parri.vp@gmail.com> (http://ParriPandian.com/)
  * License: MIT
  * GitHub URL: git+https://github.com/parripandian/expression-rule-engine.git
