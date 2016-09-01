@@ -2,9 +2,9 @@
   "name": "expression-rule-engine",
   "version": "0.2.0",
   "description": "Rule engine to process the JavaScript expression based rules",
-  "main": "index.js",
+  "main": "build/expression-rule-engine.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "grunt test"
   },
   "repository": {
     "type": "git",
