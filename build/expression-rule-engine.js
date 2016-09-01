@@ -14,7 +14,7 @@
         setOptions: setOptions,
         getOptions: getOptions,
         isValidExpression: isValidExpression,
-        convertExpressionToExpressionTree: convertToExpressionTree,
+        convertToExpressionTree: convertToExpressionTree,
         evaluateExpression: evaluateExpression
     };
 

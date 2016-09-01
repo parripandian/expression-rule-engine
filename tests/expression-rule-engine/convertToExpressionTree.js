@@ -183,7 +183,7 @@ var testData = {
 describe('convertToExpressionTree', function () {
 
     it('Converting Valid Expression', function () {
-        var result = ExpressionRuleEngine.convertExpressionToExpressionTree(testData.validExpression.input);
+        var result = ExpressionRuleEngine.convertToExpressionTree(testData.validExpression.input);
 
         expect(result.validExpression).to.equal(true);
         expect(result.error).to.be.eqls({});
@@ -191,7 +191,7 @@ describe('convertToExpressionTree', function () {
     });
 
     it('Converting Invalid Expression', function () {
-        var result = ExpressionRuleEngine.convertExpressionToExpressionTree(testData.invalidExpression.input);
+        var result = ExpressionRuleEngine.convertToExpressionTree(testData.invalidExpression.input);
 
         expect(result.validExpression).to.equal(false);
         expect(result).to.be.eqls(testData.invalidExpression.output.expressionTree);
@@ -199,14 +199,14 @@ describe('convertToExpressionTree', function () {
 
     it('Converting Expression with Variable Prefix "@"', function () {
         ExpressionRuleEngine.setOptions(testData.expressionWithVariablePrefixAt.options);
-        var result = ExpressionRuleEngine.convertExpressionToExpressionTree(testData.expressionWithVariablePrefixAt.input);
+        var result = ExpressionRuleEngine.convertToExpressionTree(testData.expressionWithVariablePrefixAt.input);
 
         expect(result.validExpression).to.equal(true);
         expect(result).to.be.eqls(testData.expressionWithVariablePrefixAt.output.expressionTree);
     });
 
     it('Converting Expression without Variable', function () {
-        var result = ExpressionRuleEngine.convertExpressionToExpressionTree(testData.expressionWithoutVariable.input);
+        var result = ExpressionRuleEngine.convertToExpressionTree(testData.expressionWithoutVariable.input);
 
         expect(result.validExpression).to.equal(true);
         expect(result).to.be.eqls(testData.expressionWithoutVariable.output.expressionTree);
@@ -214,7 +214,7 @@ describe('convertToExpressionTree', function () {
 
     it('Converting Expression with Nested Variable (Separated by _) and Prefix "@"', function () {
         ExpressionRuleEngine.setOptions(testData.expressionWithNestedVariablePrefixAt.options);
-        var result = ExpressionRuleEngine.convertExpressionToExpressionTree(testData.expressionWithNestedVariablePrefixAt.input);
+        var result = ExpressionRuleEngine.convertToExpressionTree(testData.expressionWithNestedVariablePrefixAt.input);
 
         expect(result.validExpression).to.equal(true);
         expect(result).to.be.eqls(testData.expressionWithNestedVariablePrefixAt.output.expressionTree);
