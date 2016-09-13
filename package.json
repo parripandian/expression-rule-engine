@@ -1,6 +1,6 @@
 {
   "name": "expression-rule-engine",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Rule engine to process the JavaScript expression based rules",
   "main": "build/expression-rule-engine.js",
   "scripts": {
