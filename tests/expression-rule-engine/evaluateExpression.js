@@ -4,14 +4,14 @@ var _ = require('lodash');
 
 var ExpressionRuleEngine = require('../../src/expression-rule-engine');
 
-var testData = {
+var tests = {
     expressionWithoutPrefix: {
         options: {
             replaceVariablePrefix: false,
             variablePrefix: '',
             variablePrefixReplacement: ''
         },
-        inputs: [
+        testData: [
             {
                 expression: '(a + b) * 5',
                 variableValues: {
@@ -52,7 +52,7 @@ var testData = {
             variablePrefix: '@',
             variablePrefixReplacement: 'PREFIX_AT_'
         },
-        inputs: [
+        testData: [
             {
                 expression: '(@a + b) * 5',
                 variableValues: {
@@ -86,7 +86,7 @@ var testData = {
             variablePrefix: '@',
             variablePrefixReplacement: 'PREFIX_AT_'
         },
-        inputs: [
+        testData: [
             {
                 expression: '(@Form1_@SomeValue * 100) + (@Form2_@OtherValue / 10)',
                 variableValues: {
@@ -100,27 +100,27 @@ var testData = {
 };
 
 describe('evaluateExpression', function () {
-    _.forEach(testData.expressionWithoutPrefix.inputs, function (input) {
-        it('Evaluating Expression (Without Prefix) ' + input.expression, function () {
-            ExpressionRuleEngine.setOptions(testData.options);
+    _.forEach(tests.expressionWithoutPrefix.testData, function (input) {
+        it('Evaluating Expression (Without Prefix) -> ' + input.expression, function () {
+            ExpressionRuleEngine.setOptions(tests.expressionWithoutPrefix.options);
 
             var result = ExpressionRuleEngine.evaluateExpression(input.expression, input.variableValues);
             expect(result.evaluatedValue).to.equal(input.evaluatedValue);
         });
     });
 
-    _.forEach(testData.expressionWithPrefixAt.inputs, function (input) {
-        it('Evaluating Expression (With Prefix) ' + input.expression, function () {
-            ExpressionRuleEngine.setOptions(testData.options);
+    _.forEach(tests.expressionWithPrefixAt.testData, function (input) {
+        it('Evaluating Expression (With Prefix) -> ' + input.expression, function () {
+            ExpressionRuleEngine.setOptions(tests.expressionWithPrefixAt.options);
 
             var result = ExpressionRuleEngine.evaluateExpression(input.expression, input.variableValues);
             expect(result.evaluatedValue).to.equal(input.evaluatedValue);
         });
     });
 
-    _.forEach(testData.expressionWithNestedVariableAndPrefixAt.inputs, function (input) {
-        it('Evaluating Expression (With Prefix) and Nested Variable (Separated by _) ' + input.expression, function () {
-            ExpressionRuleEngine.setOptions(testData.options);
+    _.forEach(tests.expressionWithNestedVariableAndPrefixAt.testData, function (input) {
+        it('Evaluating Expression (With Prefix) and Nested Variable (Separated by _) -> ' + input.expression, function () {
+            ExpressionRuleEngine.setOptions(tests.expressionWithNestedVariableAndPrefixAt.options);
 
             var result = ExpressionRuleEngine.evaluateExpression(input.expression, input.variableValues);
             expect(result.evaluatedValue).to.equal(input.evaluatedValue);

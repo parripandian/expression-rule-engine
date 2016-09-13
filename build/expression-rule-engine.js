@@ -171,6 +171,11 @@
     }
 
     function replaceVariables(expressionTree, variableValues) {
+        if (_.isUndefined(variableValues)) {
+            console.log(variableValues);
+            variableValues = {};
+        }
+
         var value = '';
         var variableName = '';
         if (_.isObject(expressionTree)) {
@@ -178,11 +183,12 @@
                 if (attribute === 'type') {
                     if (childExpressionTree === 'Identifier') {
                         if (engineRuleOptions.replaceVariablePrefix) {
-                            variableName = expressionTree.name.replace(engineRuleOptions.variablePrefixReplacement, '');
-                            value = variableValues[variableName];
+                            variableName = expressionTree.name.replace(new RegExp(engineRuleOptions.variablePrefixReplacement, 'g'), '');
                         } else {
-                            value = variableValues[expressionTree.name];
+                            variableName = expressionTree.name;
                         }
+
+                        value = variableValues[variableName];
 
                         if (_.isNumber(value)) {
                             expressionTree.name = value;

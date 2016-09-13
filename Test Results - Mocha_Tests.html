@@ -573,7 +573,7 @@ jQuery.cookie = function(name, value, options) {
 <div id="container">
 <div id="header">
 <div class="time">20 ms</div>
-<h1>Mocha Tests: <strong><span class="total">21 total, </span><span class="passed">21 passed</span></strong>
+<h1>Mocha Tests: <strong><span class="total">28 total, </span><span class="passed">28 passed</span></strong>
 </h1>
 <div id="treecontrol">
 <ul>
@@ -591,128 +591,163 @@ jQuery.cookie = function(name, value, options) {
 <ul id="tree">
 <li xmlns="" class="level top open">
 <span><em class="time">
-<div class="time">9 ms</div>
+<div class="time">0 ms</div>
 </em>convertToExpressionTree</span>
 <ul>
 <li class="level test">
 <span><em class="time">
-<div class="time">5 ms</div>
-</em><em class="status">passed</em>Converting Valid Expression</span>
-</li>
-<li class="level test">
-<span><em class="time">
-<div class="time">1 ms</div>
-</em><em class="status">passed</em>Converting Invalid Expression</span>
-</li>
-<li class="level test">
-<span><em class="time">
-<div class="time">2 ms</div>
-</em><em class="status">passed</em>Converting Expression with Variable Prefix "@"</span>
+<div class="time">0 ms</div>
+</em><em class="status">passed</em>Converting Valid Expression -&gt; a + b</span>
 </li>
 <li class="level test">
 <span><em class="time">
 <div class="time">0 ms</div>
-</em><em class="status">passed</em>Converting Expression without Variable</span>
+</em><em class="status">passed</em>Converting Invalid Expression -&gt; a + </span>
 </li>
 <li class="level test">
 <span><em class="time">
-<div class="time">1 ms</div>
-</em><em class="status">passed</em>Converting Expression with Nested Variable (Separated by _) and Prefix "@"</span>
+<div class="time">0 ms</div>
+</em><em class="status">passed</em>Converting Expression with Variable Prefix "@" -&gt; a + 2 + 5 * @someQuantity</span>
+</li>
+<li class="level test">
+<span><em class="time">
+<div class="time">0 ms</div>
+</em><em class="status">passed</em>Converting Expression without Variable -&gt; 1 + 2</span>
+</li>
+<li class="level test">
+<span><em class="time">
+<div class="time">0 ms</div>
+</em><em class="status">passed</em>Converting Expression with Nested Variable (Separated by _) and Prefix "@" -&gt; (@Form1_@SomeValue &gt;= 200) || (@Form2_@OtherValue &lt; 500)</span>
 </li>
 </ul>
 </li>
 <li class="level top open">
 <span><em class="time">
-<div class="time">9 ms</div>
+<div class="time">20 ms</div>
 </em>evaluateExpression</span>
 <ul>
 <li class="level test">
 <span><em class="time">
-<div class="time">2 ms</div>
-</em><em class="status">passed</em>Evaluating Expression (Without Prefix) (a + b) * 5</span>
+<div class="time">16 ms</div>
+</em><em class="status">passed</em>Evaluating Expression (Without Prefix) -&gt; (a + b) * 5</span>
 </li>
 <li class="level test">
 <span><em class="time">
 <div class="time">1 ms</div>
-</em><em class="status">passed</em>Evaluating Expression (Without Prefix) a + b / 20</span>
+</em><em class="status">passed</em>Evaluating Expression (Without Prefix) -&gt; a + b / 20</span>
 </li>
 <li class="level test">
 <span><em class="time">
 <div class="time">1 ms</div>
-</em><em class="status">passed</em>Evaluating Expression (Without Prefix) isEditable || isAuthor &amp;&amp; isAdmin</span>
+</em><em class="status">passed</em>Evaluating Expression (Without Prefix) -&gt; isEditable || isAuthor &amp;&amp; isAdmin</span>
 </li>
 <li class="level test">
 <span><em class="time">
-<div class="time">2 ms</div>
-</em><em class="status">passed</em>Evaluating Expression (Without Prefix) Math.sqrt(a * a)</span>
+<div class="time">1 ms</div>
+</em><em class="status">passed</em>Evaluating Expression (Without Prefix) -&gt; Math.sqrt(a * a)</span>
 </li>
 <li class="level test">
 <span><em class="time">
-<div class="time">2 ms</div>
-</em><em class="status">passed</em>Evaluating Expression (With Prefix) (@a + b) * 5</span>
+<div class="time">1 ms</div>
+</em><em class="status">passed</em>Evaluating Expression (With Prefix) -&gt; (@a + b) * 5</span>
 </li>
 <li class="level test">
 <span><em class="time">
 <div class="time">0 ms</div>
-</em><em class="status">passed</em>Evaluating Expression (With Prefix) @a + @b / 20</span>
-</li>
-<li class="level test">
-<span><em class="time">
-<div class="time">1 ms</div>
-</em><em class="status">passed</em>Evaluating Expression (With Prefix) @isEditable || @isAuthor &amp;&amp; @isAdmin</span>
+</em><em class="status">passed</em>Evaluating Expression (With Prefix) -&gt; @a + @b / 20</span>
 </li>
 <li class="level test">
 <span><em class="time">
 <div class="time">0 ms</div>
-</em><em class="status">passed</em>Evaluating Expression (With Prefix) and Nested Variable (Separated by _) (@Form1_@SomeValue * 100) + (@Form2_@OtherValue / 10)</span>
+</em><em class="status">passed</em>Evaluating Expression (With Prefix) -&gt; @isEditable || @isAuthor &amp;&amp; @isAdmin</span>
+</li>
+<li class="level test">
+<span><em class="time">
+<div class="time">0 ms</div>
+</em><em class="status">passed</em>Evaluating Expression (With Prefix) and Nested Variable (Separated by _) -&gt; (@Form1_@SomeValue * 100) + (@Form2_@OtherValue / 10)</span>
 </li>
 </ul>
 </li>
 <li class="level top open">
 <span><em class="time">
-<div class="time">1 ms</div>
+<div class="time">0 ms</div>
 </em>isValidExpression</span>
 <ul>
 <li class="level test">
 <span><em class="time">
 <div class="time">0 ms</div>
-</em><em class="status">passed</em>Checking Valid Expression</span>
+</em><em class="status">passed</em>Checking Valid Expression -&gt; a + b</span>
 </li>
 <li class="level test">
 <span><em class="time">
 <div class="time">0 ms</div>
-</em><em class="status">passed</em>Checking Invalid Expression</span>
+</em><em class="status">passed</em>Checking Valid Expression -&gt; a + b * 100</span>
 </li>
 <li class="level test">
 <span><em class="time">
 <div class="time">0 ms</div>
-</em><em class="status">passed</em>Checking Valid Expression with Variable Prefix "@"</span>
-</li>
-<li class="level test">
-<span><em class="time">
-<div class="time">1 ms</div>
-</em><em class="status">passed</em>Checking Invalid Expression with Variable Prefix "@"</span>
+</em><em class="status">passed</em>Checking Invalid Expression -&gt; a + b * </span>
 </li>
 <li class="level test">
 <span><em class="time">
 <div class="time">0 ms</div>
-</em><em class="status">passed</em>Checking Expression without Variable</span>
+</em><em class="status">passed</em>Checking Invalid Expression -&gt; a + b * 100 || </span>
 </li>
 <li class="level test">
 <span><em class="time">
 <div class="time">0 ms</div>
-</em><em class="status">passed</em>Checking Expression With Nested Variables (Separated by _)</span>
+</em><em class="status">passed</em>Checking Valid Expression with Variable Prefix "@" -&gt; (@a + @b + @c) * 55</span>
+</li>
+<li class="level test">
+<span><em class="time">
+<div class="time">0 ms</div>
+</em><em class="status">passed</em>Checking Valid Expression with Variable Prefix "@" -&gt; a + @b * 100 </span>
+</li>
+<li class="level test">
+<span><em class="time">
+<div class="time">0 ms</div>
+</em><em class="status">passed</em>Checking Invalid Expression with Variable Prefix "@" -&gt; (@SomeValue &gt;= 200) || (@OtherValue &lt; 500) || || )</span>
+</li>
+<li class="level test">
+<span><em class="time">
+<div class="time">0 ms</div>
+</em><em class="status">passed</em>Checking Invalid Expression with Variable Prefix "@" -&gt; (@SomeValue &gt;= 700) &amp;&amp; (@OtherValue == 100))</span>
+</li>
+<li class="level test">
+<span><em class="time">
+<div class="time">0 ms</div>
+</em><em class="status">passed</em>Checking Expression without Variable -&gt; 120 + 25 </span>
+</li>
+<li class="level test">
+<span><em class="time">
+<div class="time">0 ms</div>
+</em><em class="status">passed</em>Checking Expression without Variable -&gt; 400 / 200 * 100</span>
+</li>
+<li class="level test">
+<span><em class="time">
+<div class="time">0 ms</div>
+</em><em class="status">passed</em>Checking Expression without Variable -&gt; (50 * 25) + 500</span>
+</li>
+<li class="level test">
+<span><em class="time">
+<div class="time">0 ms</div>
+</em><em class="status">passed</em>Checking Expression With Nested Variables (Separated by _) -&gt; (@Form1_@SomeValue &gt;= 200) || (@Form2_@OtherValue &lt; 500)</span>
+</li>
+<li class="level test">
+<span><em class="time">
+<div class="time">0 ms</div>
+</em><em class="status">passed</em>Checking Expression With Nested Variables (Separated by _) -&gt; (@Form3_@SomeValue * 200) - (@Form4_@OtherValue + 500)</span>
 </li>
 </ul>
 </li>
 <li class="level top open">
 <span><em class="time">
-<div class="time">1 ms</div>
+<div class="time">0 ms</div>
 </em>setOptions</span>
 <ul>
 <li class="level test">
 <span><em class="time">
-<div class="time">1 ms</div>
+<div class="time">0 ms</div>
 </em><em class="status">passed</em>Setting up Valid Options</span>
 </li>
 <li class="level test">
@@ -726,7 +761,7 @@ jQuery.cookie = function(name, value, options) {
 </div>
 </div>
 <div id="footer">
-<p>Generated by WebStorm on 9/1/16 12:23 AM</p>
+<p>Generated by WebStorm on 9/12/16 9:57 PM</p>
 </div>
 </body>
 </html>

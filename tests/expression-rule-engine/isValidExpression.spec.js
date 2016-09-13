@@ -1,15 +1,39 @@
 var chai = require('chai');
 var expect = chai.expect;
+var _ = require('lodash');
 
 var ExpressionRuleEngine = require('../../src/expression-rule-engine');
 
-var testData = {
+var tests = {
     validExpression: {
-        input: 'a + b',
-        output: {}
+        options: {
+            replaceVariablePrefix: false
+        },
+        testData: [
+            {
+                expression: 'a + b',
+                result: true
+            },
+            {
+                expression: 'a + b * 100',
+                result: true
+            }
+        ]
     },
     invalidExpression: {
-        input: 'a + '
+        options: {
+            replaceVariablePrefix: false
+        },
+        testData: [
+            {
+                expression: 'a + b * ',
+                result: false
+            },
+            {
+                expression: 'a + b * 100 || ',
+                result: false
+            }
+        ]
     },
     validExpressionWithVariablePrefixAt: {
         options: {
@@ -17,7 +41,16 @@ var testData = {
             variablePrefix: '@',
             variablePrefixReplacement: 'PREFIX_AT_'
         },
-        input: '(@a + @b + @c) * 100'
+        testData: [
+            {
+                expression: '(@a + @b + @c) * 55',
+                result: true
+            },
+            {
+                expression: 'a + @b * 100 ',
+                result: true
+            }
+        ]
     },
     invalidExpressionWithVariablePrefixAt: {
         options: {
@@ -25,11 +58,35 @@ var testData = {
             variablePrefix: '@',
             variablePrefixReplacement: 'PREFIX_AT_'
         },
-        input: '(@SomeValue >= 200) || (@OtherValue < 500) || || )'
+        testData: [
+            {
+                expression: '(@SomeValue >= 200) || (@OtherValue < 500) || || )',
+                result: false
+            },
+            {
+                expression: '(@SomeValue >= 700) && (@OtherValue == 100))',
+                result: false
+            }
+        ]
     },
     expressionWithoutVariable: {
-        input: '1 + 2',
-        output: {}
+        options: {
+            replaceVariablePrefix: false
+        },
+        testData: [
+            {
+                expression: '120 + 25 ',
+                result: true
+            },
+            {
+                expression: '400 / 200 * 100',
+                result: true
+            },
+            {
+                expression: '(50 * 25) + 500',
+                result: true
+            }
+        ]
     },
     expressionWithNestedVariable: {
         options: {
@@ -37,45 +94,75 @@ var testData = {
             variablePrefix: '@',
             variablePrefixReplacement: 'PREFIX_AT_'
         },
-        input: '(@Form1|@SomeValue >= 200) || (@Form2|@OtherValue < 500)',
-        output: true
+        testData: [
+            {
+                expression: '(@Form1_@SomeValue >= 200) || (@Form2_@OtherValue < 500)',
+                result: true
+            },
+            {
+                expression: '(@Form3_@SomeValue * 200) - (@Form4_@OtherValue + 500)',
+                result: true
+            }
+        ]
     }
 };
 
 describe('isValidExpression', function () {
 
-    it('Checking Valid Expression', function () {
-        var result = ExpressionRuleEngine.isValidExpression(testData.validExpression.input);
-        expect(result).to.equal(true);
+    _.forEach(tests.validExpression.testData, function (data) {
+        it('Checking Valid Expression -> ' + data.expression, function () {
+            ExpressionRuleEngine.setOptions(tests.validExpression.options);
+
+            var result = ExpressionRuleEngine.isValidExpression(data.expression);
+            expect(result).to.equal(data.result);
+        });
     });
 
-    it('Checking Invalid Expression', function () {
-        var result = ExpressionRuleEngine.isValidExpression(testData.invalidExpression.input);
-        expect(result).to.equal(false);
+    _.forEach(tests.invalidExpression.testData, function (data) {
+        it('Checking Invalid Expression -> ' + data.expression, function () {
+            ExpressionRuleEngine.setOptions(tests.invalidExpression.options);
+
+            var result = ExpressionRuleEngine.isValidExpression(data.expression);
+            expect(result).to.equal(data.result);
+        });
     });
 
-    it('Checking Valid Expression with Variable Prefix "@"', function () {
-        ExpressionRuleEngine.setOptions(testData.validExpressionWithVariablePrefixAt.options);
-        var result = ExpressionRuleEngine.isValidExpression(testData.validExpressionWithVariablePrefixAt.input);
-        expect(result).to.equal(true);
+    _.forEach(tests.validExpressionWithVariablePrefixAt.testData, function (data) {
+        it('Checking Valid Expression with Variable Prefix "@" -> ' + data.expression, function () {
+            ExpressionRuleEngine.setOptions(tests.validExpressionWithVariablePrefixAt.options);
+
+            var result = ExpressionRuleEngine.isValidExpression(data.expression);
+            expect(result).to.equal(data.result);
+        });
     });
 
-    it('Checking Invalid Expression with Variable Prefix "@"', function () {
-        ExpressionRuleEngine.setOptions(testData.invalidExpressionWithVariablePrefixAt.options);
-        var result = ExpressionRuleEngine.isValidExpression(testData.invalidExpressionWithVariablePrefixAt.input);
-        expect(result).to.equal(false);
+    _.forEach(tests.invalidExpressionWithVariablePrefixAt.testData, function (data) {
+        it('Checking Invalid Expression with Variable Prefix "@" -> ' + data.expression, function () {
+            ExpressionRuleEngine.setOptions(tests.invalidExpressionWithVariablePrefixAt.options);
+
+            var result = ExpressionRuleEngine.isValidExpression(data.expression);
+            expect(result).to.equal(data.result);
+        });
     });
 
-    it('Checking Expression without Variable', function () {
-        var result = ExpressionRuleEngine.isValidExpression(testData.expressionWithoutVariable.input);
-        expect(result).to.equal(true);
+    _.forEach(tests.expressionWithoutVariable.testData, function (data) {
+        it('Checking Expression without Variable -> ' + data.expression, function () {
+            ExpressionRuleEngine.setOptions(tests.expressionWithoutVariable.options);
+
+            var result = ExpressionRuleEngine.isValidExpression(data.expression);
+            expect(result).to.equal(data.result);
+        });
     });
 
-    it('Checking Expression With Nested Variables (Separated by _)', function () {
-        ExpressionRuleEngine.setOptions(testData.expressionWithNestedVariable.options);
-        var result = ExpressionRuleEngine.isValidExpression(testData.expressionWithNestedVariable.input);
-        expect(result).to.equal(testData.expressionWithNestedVariable.output);
+    _.forEach(tests.expressionWithNestedVariable.testData, function (data) {
+        it('Checking Expression With Nested Variables (Separated by _) -> ' + data.expression, function () {
+            ExpressionRuleEngine.setOptions(tests.expressionWithNestedVariable.options);
+
+            var result = ExpressionRuleEngine.isValidExpression(data.expression);
+            expect(result).to.equal(data.result);
+        });
     });
+
 });
 
 

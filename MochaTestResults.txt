@@ -1,34 +1,41 @@
 
 
   convertToExpressionTree
-    √ Converting Valid Expression
-    √ Converting Invalid Expression
-    √ Converting Expression with Variable Prefix "@"
-    √ Converting Expression without Variable
-    √ Converting Expression with Nested Variable (Separated by _) and Prefix "@"
+    √ Converting Valid Expression -> a + b
+    √ Converting Invalid Expression -> a + 
+    √ Converting Expression with Variable Prefix "@" -> a + 2 + 5 * @someQuantity
+    √ Converting Expression without Variable -> 1 + 2
+    √ Converting Expression with Nested Variable (Separated by _) and Prefix "@" -> (@Form1_@SomeValue >= 200) || (@Form2_@OtherValue < 500)
 
   evaluateExpression
-    √ Evaluating Expression (Without Prefix) (a + b) * 5
-    √ Evaluating Expression (Without Prefix) a + b / 20
-    √ Evaluating Expression (Without Prefix) isEditable || isAuthor && isAdmin
-    √ Evaluating Expression (Without Prefix) Math.sqrt(a * a)
-    √ Evaluating Expression (With Prefix) (@a + b) * 5
-    √ Evaluating Expression (With Prefix) @a + @b / 20
-    √ Evaluating Expression (With Prefix) @isEditable || @isAuthor && @isAdmin
-    √ Evaluating Expression (With Prefix) and Nested Variable (Separated by _) (@Form1_@SomeValue * 100) + (@Form2_@OtherValue / 10)
+    √ Evaluating Expression (Without Prefix) -> (a + b) * 5
+    √ Evaluating Expression (Without Prefix) -> a + b / 20
+    √ Evaluating Expression (Without Prefix) -> isEditable || isAuthor && isAdmin
+    √ Evaluating Expression (Without Prefix) -> Math.sqrt(a * a)
+    √ Evaluating Expression (With Prefix) -> (@a + b) * 5
+    √ Evaluating Expression (With Prefix) -> @a + @b / 20
+    √ Evaluating Expression (With Prefix) -> @isEditable || @isAuthor && @isAdmin
+    √ Evaluating Expression (With Prefix) and Nested Variable (Separated by _) -> (@Form1_@SomeValue * 100) + (@Form2_@OtherValue / 10)
 
   isValidExpression
-    √ Checking Valid Expression
-    √ Checking Invalid Expression
-    √ Checking Valid Expression with Variable Prefix "@"
-    √ Checking Invalid Expression with Variable Prefix "@"
-    √ Checking Expression without Variable
-    √ Checking Expression With Nested Variables (Separated by _)
+    √ Checking Valid Expression -> a + b
+    √ Checking Valid Expression -> a + b * 100
+    √ Checking Invalid Expression -> a + b * 
+    √ Checking Invalid Expression -> a + b * 100 || 
+    √ Checking Valid Expression with Variable Prefix "@" -> (@a + @b + @c) * 55
+    √ Checking Valid Expression with Variable Prefix "@" -> a + @b * 100 
+    √ Checking Invalid Expression with Variable Prefix "@" -> (@SomeValue >= 200) || (@OtherValue < 500) || || )
+    √ Checking Invalid Expression with Variable Prefix "@" -> (@SomeValue >= 700) && (@OtherValue == 100))
+    √ Checking Expression without Variable -> 120 + 25 
+    √ Checking Expression without Variable -> 400 / 200 * 100
+    √ Checking Expression without Variable -> (50 * 25) + 500
+    √ Checking Expression With Nested Variables (Separated by _) -> (@Form1_@SomeValue >= 200) || (@Form2_@OtherValue < 500)
+    √ Checking Expression With Nested Variables (Separated by _) -> (@Form3_@SomeValue * 200) - (@Form4_@OtherValue + 500)
 
   setOptions
     √ Setting up Valid Options
     √ Setting up Invalid Options
 
 
-  21 passing (22ms)
+  28 passing (31ms)
 

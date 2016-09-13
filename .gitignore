@@ -38,3 +38,4 @@ jspm_packages
 # Optional REPL history
 .node_repl_history
 .idea/
+expression-rule-engine-0.5.0.zip
