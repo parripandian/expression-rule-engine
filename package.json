@@ -26,7 +26,7 @@
     "node": ">= 0.10.0"
   },
   "directories": {
-    "test": "test"
+    "test": "tests"
   },
   "private": false,
   "devDependencies": {
