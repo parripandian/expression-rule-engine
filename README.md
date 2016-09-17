@@ -1,4 +1,4 @@
-# expression-rule-engine
+# expression-rule-engine [![Build Status](https://travis-ci.org/parripandian/expression-rule-engine.svg?branch=master)](https://travis-ci.org/parripandian/expression-rule-engine)
 Rule engine to process the JavaScript expression based rules
 
 ##Methods
